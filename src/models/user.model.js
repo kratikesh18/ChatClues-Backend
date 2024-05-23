@@ -1,9 +1,15 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-const userScheama = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: {
       type: String,
       required: true,
       unique: true,
@@ -35,4 +41,4 @@ userSchema.methods.genrateAccessToken = function () {
     { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
   );
 };
-export const User = mongoose.model("User", userScheama);
+export const User = mongoose.model("User", userSchema);
